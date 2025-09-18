@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.naulian.neumorphism"
+    namespace = "com.naulian.neumorphic"
     compileSdk = 36
 
     defaultConfig {
@@ -95,7 +95,7 @@ mavenPublishing {
     //./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
     pom {
-        name.set("Neumorphism")
+        name.set("Neumorphic")
         description.set("Neumorphic components library for jetpack compose")
         inceptionYear.set("2025")
         url.set("https://github.com/cinkhangin/neumorphic/")
