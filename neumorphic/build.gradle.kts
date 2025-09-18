@@ -96,7 +96,7 @@ mavenPublishing {
 
     pom {
         name.set("Neumorphism")
-        description.set("a neumorphism component library for compose")
+        description.set("Neumorphic components library for jetpack compose")
         inceptionYear.set("2025")
         url.set("https://github.com/cinkhangin/neumorphic/")
         licenses {
