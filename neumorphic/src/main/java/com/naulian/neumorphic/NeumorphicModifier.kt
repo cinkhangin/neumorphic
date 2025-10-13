@@ -86,7 +86,7 @@ fun Modifier.neumorphicDown(
 @Preview
 @Composable
 private fun LightPreview() {
-    ComposableTheme {
+    NeumorphicTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -121,7 +121,7 @@ private fun LightPreview() {
 @Preview
 @Composable
 private fun DarkPreview() {
-    ComposableTheme(darkTheme = true) {
+    NeumorphicTheme(darkTheme = true) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

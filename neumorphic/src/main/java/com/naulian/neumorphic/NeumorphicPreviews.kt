@@ -88,7 +88,7 @@ private fun NeumorphicPreview(
     contentAlignment: Alignment = Alignment.TopStart,
     content: @Composable BoxScope.() -> Unit
 ) {
-    ComposableTheme(darkTheme = dark) {
+    NeumorphicTheme(darkTheme = dark) {
         Box(
             modifier = modifier
                 .background(color = MaterialTheme.colorScheme.background)

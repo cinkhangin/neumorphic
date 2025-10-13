@@ -90,7 +90,7 @@ mavenPublishing {
     coordinates(
         groupId = "com.naulian",
         artifactId = "neumorphic",
-        version = "0.1.0"
+        version = "0.1.2"
     )
     //./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
