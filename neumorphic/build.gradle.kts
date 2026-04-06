@@ -1,14 +1,11 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose)
     alias(libs.plugins.vanniktech.maven)
 }
 
 android {
-    namespace = "com.naulian.neumorphic"
+    namespace = "com.ckgin.neumorphic"
     compileSdk = 36
 
     defaultConfig {
@@ -41,12 +38,6 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
@@ -88,7 +79,7 @@ mavenPublishing {
     signAllPublications()
 
     coordinates(
-        groupId = "com.naulian",
+        groupId = "com.ckgin",
         artifactId = "neumorphic",
         version = "0.1.2"
     )
@@ -109,8 +100,8 @@ mavenPublishing {
 
         developers {
             developer {
-                id.set("naulian")
-                name.set("Naulian")
+                id.set("ckgin")
+                name.set("Cin Khan Gin")
                 url.set("https://github.com/cinkhangin/")
             }
         }

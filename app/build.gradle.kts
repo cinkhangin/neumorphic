@@ -1,10 +1,5 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.google.hilt)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.serialization)
 }
@@ -50,12 +45,6 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
 dependencies {
     //core
     implementation(libs.androidx.core.ktx)
@@ -89,12 +78,9 @@ dependencies {
 
     implementation(libs.kotlinx.serialization.json)
 
-    //hilt
-    implementation(libs.google.hilt.android)
-    ksp(libs.google.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-
     //coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    implementation(project(":neumorphic"))
 }
