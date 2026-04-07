@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.InfiniteRepeatableSpec
@@ -72,7 +72,7 @@ fun NeumorphismComponentShowcase() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
     ) {
-        NeumorphicBorder(
+        _root_ide_package_.com.ckgin.neumorphic.NeumorphicBorder(
             modifier = Modifier.fillMaxWidth(),
             cornerRadiusDp = 10.dp,
             borderThickness = 2.dp,
@@ -95,7 +95,7 @@ fun NeumorphismComponentShowcase() {
                     placeHolder = "Text Field with Placeholder"
                 )
 
-                NeumorphicButton(
+                _root_ide_package_.com.ckgin.neumorphic.NeumorphicButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {},
                     enabled = checked
@@ -103,7 +103,7 @@ fun NeumorphismComponentShowcase() {
                     Text(text = "Button")
                 }
 
-                NeumorphicButton(
+                _root_ide_package_.com.ckgin.neumorphic.NeumorphicButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {},
                     enabled = !checked
@@ -117,28 +117,28 @@ fun NeumorphismComponentShowcase() {
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {
 
-            NeumorphicIconButton(onClick = {}) {
+            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Favourite),
                     contentDescription = "Fav"
                 )
             }
 
-            NeumorphicIconButton(onClick = {}) {
+            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Delete),
                     contentDescription = "Fav"
                 )
             }
 
-            NeumorphicIconButton(onClick = {}) {
+            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Copy),
                     contentDescription = "Fav"
                 )
             }
 
-            NeumorphicIconButton(onClick = {}) {
+            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Home),
                     contentDescription = "Fav"
@@ -146,7 +146,7 @@ fun NeumorphismComponentShowcase() {
             }
         }
 
-        NeumorphicUpHorizontalDivider()
+        _root_ide_package_.com.ckgin.neumorphic.NeumorphicUpHorizontalDivider()
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -174,7 +174,7 @@ fun NeumorphismComponentShowcase() {
         )
 
         Text("Linear Progress Indicator at ${(progress * 100).roundToInt()}%", color = MaterialTheme.colorScheme.onBackground)
-        NeumorphicLinearProgressIndicator(
+        _root_ide_package_.com.ckgin.neumorphic.NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { progress }
         )
@@ -188,7 +188,7 @@ fun NeumorphismComponentShowcase() {
         }
 
         Text("Slider ${(sliderState.value * 100).roundToInt()}", color = MaterialTheme.colorScheme.onBackground)
-        NeumorphicSlider(
+        _root_ide_package_.com.ckgin.neumorphic.NeumorphicSlider(
             modifier = Modifier.fillMaxWidth(),
             state = sliderState
         )
@@ -212,7 +212,7 @@ fun NeumorphismComponentShowcase() {
         ) {
             Text("Radio Button", color = MaterialTheme.colorScheme.onBackground)
 
-            NeumorphicRadioButton(
+            _root_ide_package_.com.ckgin.neumorphic.NeumorphicRadioButton(
                 checked = checked,
                 onCheckedChange = { checked = it })
         }
@@ -223,7 +223,7 @@ fun NeumorphismComponentShowcase() {
 @Preview
 @Composable
 private fun ShowcaseLightPreview() {
-    NeumorphicPreviewScreen {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewScreen {
         NeumorphismComponentShowcase()
     }
 }
@@ -231,7 +231,7 @@ private fun ShowcaseLightPreview() {
 @Preview
 @Composable
 private fun ShowcaseDarkPreview() {
-    NeumorphicPreviewScreen(dark = true) {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewScreen(dark = true) {
         NeumorphismComponentShowcase()
     }
 }

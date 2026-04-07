@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ckgin.neumorphic.NeuSwitch
+import com.ckgin.neumorphic.demo.NeuSwitchDemo
 import com.ckgin.neumorphic.NeumorphicTheme
 
 
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf(false)
                 }
 
-                NeuSwitch(
+                NeuSwitchDemo(
                     checked = checked,
                     onCheckedChange = {
                         checked = it

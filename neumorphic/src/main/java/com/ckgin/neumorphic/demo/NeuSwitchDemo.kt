@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.demo
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.ckgin.modify.themeColors
 
 @Composable
-fun NeuSwitch(
+fun NeuSwitchDemo(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
@@ -80,7 +80,9 @@ fun NeuSwitch(
                     shape = CircleShape,
                     shadow = Shadow(
                         radius = 40.dp,
-                        color = NeumorphicTheme.colorScheme.light.copy(0.5f),
+                        color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.light.copy(
+                            0.5f
+                        ),
                         offset = DpOffset(x = (40).dp, y = (-40).dp)
                     )
                 )
@@ -88,7 +90,9 @@ fun NeuSwitch(
                     shape = CircleShape,
                     shadow = Shadow(
                         radius = 40.dp,
-                        color = NeumorphicTheme.colorScheme.shadow.copy(0.2f),
+                        color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.shadow.copy(
+                            0.2f
+                        ),
                         offset = DpOffset(x = (-40).dp, y = (40).dp)
                     )
                 )
@@ -96,7 +100,7 @@ fun NeuSwitch(
                     shape = CircleShape,
                     shadow = Shadow(
                         radius = 2.dp,
-                        color = NeumorphicTheme.colorScheme.light,
+                        color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.light,
                         offset = DpOffset(x = (2).dp, y = (-2).dp)
                     )
                 )
@@ -104,7 +108,7 @@ fun NeuSwitch(
                     shape = CircleShape,
                     shadow = Shadow(
                         radius = 2.dp,
-                        color = NeumorphicTheme.colorScheme.shadow,
+                        color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.shadow,
                         offset = DpOffset(x = (-2).dp, y = (2).dp)
                     )
                 )
@@ -127,7 +131,9 @@ fun NeuSwitch(
                         shape = CircleShape,
                         shadow = Shadow(
                             radius = 2.dp,
-                            color = NeumorphicTheme.colorScheme.light.copy(0.9f),
+                            color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.light.copy(
+                                0.9f
+                            ),
                             offset = DpOffset(x = (2).dp, y = (-2).dp)
                         )
                     )
@@ -135,7 +141,7 @@ fun NeuSwitch(
                         shape = CircleShape,
                         shadow = Shadow(
                             radius = 2.dp,
-                            color = NeumorphicTheme.colorScheme.shadow,
+                            color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.shadow,
                             offset = DpOffset(x = (-2).dp, y = (2).dp)
                         )
                     )
@@ -153,7 +159,7 @@ fun NeuSwitch(
                         shape = CircleShape,
                         shadow = Shadow(
                             radius = 10.dp,
-                            color = NeumorphicTheme.colorScheme.darkShadow,
+                            color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.darkShadow,
                             offset = DpOffset(x = (-10).dp, y = (10).dp)
                         )
                     )
@@ -165,7 +171,7 @@ fun NeuSwitch(
                         shape = CircleShape,
                         shadow = Shadow(
                             radius = 2.dp,
-                            color = NeumorphicTheme.colorScheme.light,
+                            color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.light,
                             offset = DpOffset(x = (-2).dp, y = (2).dp)
                         )
                     )
@@ -173,7 +179,7 @@ fun NeuSwitch(
                         shape = CircleShape,
                         shadow = Shadow(
                             radius = 2.dp,
-                            color = NeumorphicTheme.colorScheme.darkShadow,
+                            color = com.ckgin.neumorphic.NeumorphicTheme.colorScheme.darkShadow,
                             offset = DpOffset(x = (2).dp, y = (-2).dp)
                         )
                     )
@@ -184,14 +190,14 @@ fun NeuSwitch(
 
 @Preview
 @Composable
-private fun NeuSwitchPreview() {
-    NeumorphicTheme {
+private fun NeuSwitchDemoPreview() {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicTheme {
 
         var checked by remember {
             mutableStateOf(false)
         }
 
-        NeuSwitch(
+        NeuSwitchDemo(
             checked = checked,
             onCheckedChange = {
                 checked = it

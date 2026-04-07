@@ -1,7 +1,5 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.new
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -19,12 +17,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.innerShadow
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.ckgin.modify.HugeIcons
+import com.ckgin.neumorphic.NeumorphicPreviewSquare
+import com.ckgin.neumorphic.NeumorphicTheme
 
 @Composable
 fun NeumorphicCheckBox(
@@ -33,19 +37,10 @@ fun NeumorphicCheckBox(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
+    shape: Shape = RoundedCornerShape(20),
     thumbPadding: Dp = 4.dp
 ) {
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
-
-    val shadowPadding by animateDpAsState(
-        targetValue = when {
-            enabled -> if (checked) 4.dp else 0.dp
-            else -> 1.dp
-        },
-        animationSpec = tween(
-            durationMillis = 400
-        )
-    )
 
     val toggleableModifier =
         if (onCheckedChange != null) {
@@ -67,9 +62,41 @@ fun NeumorphicCheckBox(
         modifier = modifier
             .then(toggleableModifier)
             .size(32.dp)
-            .neumorphicDown(
-                shape = RoundedCornerShape(20),
-                shadowPadding = 4.dp,
+            .innerShadow(
+                shape = shape,
+                shadow = Shadow(
+                    radius = 20.dp,
+                    color = NeumorphicTheme.colorScheme.light.copy(
+                        0.5f
+                    ),
+                    offset = DpOffset(x = (20).dp, y = (-20).dp)
+                )
+            )
+            .innerShadow(
+                shape = shape,
+                shadow = Shadow(
+                    radius = 20.dp,
+                    color = NeumorphicTheme.colorScheme.shadow.copy(
+                        0.2f
+                    ),
+                    offset = DpOffset(x = (-20).dp, y = (20).dp)
+                )
+            )
+            .innerShadow(
+                shape = shape,
+                shadow = Shadow(
+                    radius = 1.dp,
+                    color = NeumorphicTheme.colorScheme.light,
+                    offset = DpOffset(x = (1).dp, y = (-1).dp)
+                )
+            )
+            .innerShadow(
+                shape = shape,
+                shadow = Shadow(
+                    radius = 1.dp,
+                    color = NeumorphicTheme.colorScheme.shadow,
+                    offset = DpOffset(x = (-1).dp, y = (1).dp)
+                )
             )
             .padding(thumbPadding)
     ) {
@@ -77,12 +104,7 @@ fun NeumorphicCheckBox(
             Box(
                 modifier = Modifier
                     .size(32.dp - (thumbPadding * 2))
-                    .background(MaterialTheme.colorScheme.background, RoundedCornerShape(20))
-                    .neumorphicUp(
-                        shape = RoundedCornerShape(20),
-                        color = MaterialTheme.colorScheme.primary,
-                        shadowPadding = shadowPadding
-                    ),
+                    .background(MaterialTheme.colorScheme.background, RoundedCornerShape(20)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.neumorphicDown
+import com.ckgin.neumorphic.neumorphicUp
 import kotlinx.coroutines.delay
 
 @Composable
@@ -127,7 +129,7 @@ fun NeumorphicSwitch(
 @Preview
 @Composable
 private fun NeumorphicSwitchPreview() {
-    NeumorphicPreviewColumn(
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewColumn(
         modifier = Modifier.size(200.dp)
     ) {
 

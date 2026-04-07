@@ -1,5 +1,6 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.new
 
+import com.ckgin.neumorphic.NeumorphicPreviewSquare
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
@@ -19,21 +20,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.innerShadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.ckgin.modify.If
 import com.ckgin.modify.rememberBooleanState
+import com.ckgin.neumorphic.NeumorphicTheme
 
 @Composable
-fun NeumorphicTextField(
+fun NeuTextField(
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
     accentColor: Color = MaterialTheme.colorScheme.primary,
@@ -60,9 +66,41 @@ fun NeumorphicTextField(
         decorator = {
             Box(
                 modifier = Modifier
-                    .neumorphicDown(
+                    .innerShadow(
                         shape = shape,
-                        shadowPadding = 4.dp,
+                        shadow = Shadow(
+                            radius = 40.dp,
+                            color = NeumorphicTheme.colorScheme.light.copy(
+                                0.5f
+                            ),
+                            offset = DpOffset(x = (40).dp, y = (-40).dp)
+                        )
+                    )
+                    .innerShadow(
+                        shape = shape,
+                        shadow = Shadow(
+                            radius = 40.dp,
+                            color = NeumorphicTheme.colorScheme.shadow.copy(
+                                0.2f
+                            ),
+                            offset = DpOffset(x = (-40).dp, y = (40).dp)
+                        )
+                    )
+                    .innerShadow(
+                        shape = shape,
+                        shadow = Shadow(
+                            radius = 1.dp,
+                            color = NeumorphicTheme.colorScheme.light,
+                            offset = DpOffset(x = (1).dp, y = (-1).dp)
+                        )
+                    )
+                    .innerShadow(
+                        shape = shape,
+                        shadow = Shadow(
+                            radius = 1.dp,
+                            color = NeumorphicTheme.colorScheme.shadow,
+                            offset = DpOffset(x = (-1).dp, y = (1).dp)
+                        )
                     )
                     .heightIn(min = 48.dp)
                     .If(onFocus) {
@@ -92,16 +130,22 @@ fun NeumorphicTextField(
 
 @Preview
 @Composable
-private fun NeumorphicTextFieldPreview() {
+private fun NeuTextFieldPreview() {
     NeumorphicPreviewSquare {
-        NeumorphicTextField(
+        NeuTextField(
             modifier = Modifier,
             state = TextFieldState()
         )
 
-        NeumorphicTextField(
+        NeuTextField(
             modifier = Modifier.fillMaxWidth(),
             shape = CircleShape,
+            state = TextFieldState("hello")
+        )
+
+        NeuTextField(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RectangleShape,
             state = TextFieldState("hello")
         )
     }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Neumorphic</string>
+    <string name="current_vacancies">Current\nVacancies</string>
+    <string name="filters">Filters</string>
+    <string name="information_technologies">Information\nTechnologies</string>
+    <string name="salesforce">Salesforce</string>
+    <string name="regional_vice_president">Regional Vice\nPresident</string>
+    <string name="salary_range">$158K – $287K</string>
+    <string name="see_details">See details</string>
 </resources>
