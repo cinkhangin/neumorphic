@@ -19,7 +19,9 @@ data class NeumorphicColorScheme(
     val shadow: Color,
     val darkShadow: Color,
     val onColorShadow: Color,
-    val container: Color
+    val container: Color,
+    val black: Color,
+    val surface: Color = background,
 )
 
 fun lightNeumorphicColorScheme(
@@ -29,7 +31,8 @@ fun lightNeumorphicColorScheme(
     darkShadow: Color = DarkShadow,
     onColorLight: Color = OnColorLight,
     onColorShadow: Color = OnColorShadow,
-    container: Color = LightContainer
+    container: Color = LightContainer,
+    surface: Color = background
 ) = NeumorphicColorScheme(
     background = background,
     light = light,
@@ -37,7 +40,9 @@ fun lightNeumorphicColorScheme(
     darkShadow = darkShadow,
     onColorLight = onColorLight,
     onColorShadow = onColorShadow,
-    container = container
+    container = container,
+    black = Color.Black,
+    surface = surface
 )
 
 fun darkNeumorphicColorScheme(
@@ -47,7 +52,8 @@ fun darkNeumorphicColorScheme(
     darkShadow: Color = Color.Black,
     onColorLight: Color = DarkOnColorLight,
     onColorShadow: Color = DarkOnColorShadow,
-    container: Color = DarkContainer
+    container: Color = DarkContainer,
+    surface: Color = background
 ) = NeumorphicColorScheme(
     background = background,
     light = light,
@@ -55,7 +61,9 @@ fun darkNeumorphicColorScheme(
     darkShadow = darkShadow,
     onColorLight = onColorLight,
     onColorShadow = onColorShadow,
-    container = container
+    container = container,
+    black = Color.Black,
+    surface = surface
 )
 
 @Composable

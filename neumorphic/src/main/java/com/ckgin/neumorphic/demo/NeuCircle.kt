@@ -2,6 +2,7 @@ package com.ckgin.neumorphic.demo
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -17,14 +18,13 @@ import com.ckgin.neumorphic.NeumorphicTheme
 
 @Composable
 fun NeuCircle(modifier: Modifier = Modifier) {
-
     Box(
         modifier = modifier
             .dropShadow(
                 shape = CircleShape,
                 shadow = Shadow(
                     radius = 10.dp,
-                    color = NeumorphicTheme.colorScheme.darkShadow,
+                    color = NeumorphicTheme.colorScheme.black.copy(0.8f),
                     offset = DpOffset(x = (-10).dp, y = (10).dp)
                 )
             )
@@ -35,7 +35,7 @@ fun NeuCircle(modifier: Modifier = Modifier) {
             .innerShadow(
                 shape = CircleShape,
                 shadow = Shadow(
-                    radius = 1.dp,
+                    radius = 5.dp,
                     color = NeumorphicTheme.colorScheme.light,
                     offset = DpOffset(x = (-5).dp, y = (5).dp)
                 )
@@ -43,9 +43,22 @@ fun NeuCircle(modifier: Modifier = Modifier) {
             .innerShadow(
                 shape = CircleShape,
                 shadow = Shadow(
-                    radius = 10.dp,
-                    color = NeumorphicTheme.colorScheme.shadow,
+                    radius = 5.dp,
+                    color = NeumorphicTheme.colorScheme.darkShadow,
                     offset = DpOffset(x = (5).dp, y = (-5).dp)
+                )
+            )
+            .padding(5.dp)
+            .background(
+                color = NeumorphicTheme.colorScheme.background,
+                shape = CircleShape
+            )
+            .innerShadow(
+                shape = CircleShape,
+                shadow = Shadow(
+                    radius = 1.dp,
+                    color = NeumorphicTheme.colorScheme.light,
+                    offset = DpOffset(x = (-1).dp, y = (1).dp)
                 )
             )
             .innerShadow(
@@ -53,7 +66,7 @@ fun NeuCircle(modifier: Modifier = Modifier) {
                 shadow = Shadow(
                     radius = 1.dp,
                     color = NeumorphicTheme.colorScheme.shadow,
-                    offset = DpOffset(x = (5).dp, y = (-5).dp)
+                    offset = DpOffset(x = (1).dp, y = (-1).dp)
                 )
             )
     )
@@ -62,7 +75,7 @@ fun NeuCircle(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun NeuCirclePreview() {
-    NeumorphicPreviewBox() {
+    NeumorphicPreviewBox {
         NeuCircle(modifier = Modifier.size(100.dp))
     }
 }

@@ -5,16 +5,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -29,7 +30,7 @@ interface Texture {
 
 fun Modifier.texture(
     texture: Texture,
-    shape: Shape = RectangleShape,
+    shape: Shape = CircleShape,
 ): Modifier = this.drawBehind {
     val outline = shape.createOutline(size, layoutDirection, this)
     val path = when (outline) {
@@ -100,7 +101,7 @@ class WoodTexture(
             val path = Path()
             val startY = (size.height / numLines) * i + (random.nextFloat() * 10f)
             path.moveTo(0f, startY)
-            
+
             var currentX = 0f
             val stepX = 30f
             while (currentX < size.width) {
@@ -111,7 +112,7 @@ class WoodTexture(
                     currentX, startY + variation
                 )
             }
-            
+
             drawPath(
                 path = path,
                 color = grainColor.copy(alpha = 0.25f),
@@ -361,6 +362,168 @@ class BrushedSteelTexture(
     }
 }
 
+class RadialSteelTexture(
+    private val color: Color = Color(0xFFBDBDBD),
+    private val highlightColor: Color = Color(0xFFFFFFFF),
+    private val shadowColor: Color = Color(0xFF757575)
+) : Texture {
+    override fun DrawScope.draw() {
+        val center = Offset(size.width / 2, size.height / 2)
+        val radius = size.width.coerceAtLeast(size.height)
+
+        // Using precise stops for narrow, sharp highlights (the "X" pattern)
+        val sweepGradient = Brush.sweepGradient(
+            0.00f to highlightColor,
+            0.25f to shadowColor,
+            0.50f to highlightColor,
+            0.75f to shadowColor,
+            1f to highlightColor,
+            center = center
+        )
+
+        drawCircle(
+            brush = sweepGradient,
+            radius = radius,
+            center = center
+        )
+
+        // Fine circular brushed lines (concentric)
+        val random = Random(1234)
+        repeat(100) {
+            val r = random.nextFloat() * radius
+            val alpha = random.nextFloat() * 0.12f
+            drawCircle(
+                color = if (random.nextBoolean()) Color.White.copy(alpha = alpha) else Color.Black.copy(
+                    alpha = alpha * 0.5f
+                ),
+                radius = r,
+                center = center,
+                style = Stroke(width = 0.5f)
+            )
+        }
+
+        // Fine radial scratches to emphasize the "brushed" direction
+        repeat(600) {
+            val angle = random.nextFloat() * 360f
+            val rad = Math.toRadians(angle.toDouble())
+            val cos = Math.cos(rad).toFloat()
+            val sin = Math.sin(rad).toFloat()
+            val startDist = random.nextFloat() * radius
+            val length = random.nextFloat() * 40f
+
+            drawLine(
+                color = Color.White.copy(alpha = 0.05f),
+                start = Offset(center.x + cos * startDist, center.y + sin * startDist),
+                end = Offset(
+                    center.x + cos * (startDist + length),
+                    center.y + sin * (startDist + length)
+                ),
+                strokeWidth = 0.5f
+            )
+        }
+    }
+}
+
+class SilverGlitterTexture(
+    private val color: Color = Color(0xFF9E9E9E),
+    private val seed: Int = 777
+) : Texture {
+    override fun DrawScope.draw() {
+        drawRect(color)
+        val random = Random(seed)
+        val glitterColors = listOf(
+            Color(0xFFFFFFFF),
+            Color(0xFFEEEEEE),
+            Color(0xFFBDBDBD),
+            Color(0xFF757575),
+            Color(0xFFE0E0E0)
+        )
+
+        repeat(5000) {
+            val x = random.nextFloat() * size.width
+            val y = random.nextFloat() * size.height
+            val radius = random.nextFloat() * 1.5f + 0.5f
+            val alpha = random.nextFloat() * 0.8f + 0.2f
+
+            drawCircle(
+                color = glitterColors[random.nextInt(glitterColors.size)].copy(alpha = alpha),
+                radius = radius,
+                center = Offset(x, y)
+            )
+        }
+
+        // Add "sparkle" highlights
+        repeat(60) {
+            val x = random.nextFloat() * size.width
+            val y = random.nextFloat() * size.height
+            val sparkleSize = random.nextFloat() * 5f + 2f
+
+            drawLine(
+                Color.White.copy(alpha = 0.7f),
+                Offset(x - sparkleSize, y),
+                Offset(x + sparkleSize, y),
+                strokeWidth = 1f
+            )
+            drawLine(
+                Color.White.copy(alpha = 0.7f),
+                Offset(x, y - sparkleSize),
+                Offset(x, y + sparkleSize),
+                strokeWidth = 1f
+            )
+        }
+    }
+}
+
+class CharcoalGlitterTexture(
+    private val color: Color = Color(0xFF424242),
+    private val seed: Int = 999
+) : Texture {
+    override fun DrawScope.draw() {
+        drawRect(color)
+        val random = Random(seed)
+        val glitterColors = listOf(
+            Color(0xFF757575),
+            Color(0xFF616161),
+            Color(0xFF424242),
+            Color(0xFF212121),
+            Color(0xFF9E9E9E)
+        )
+
+        repeat(5000) {
+            val x = random.nextFloat() * size.width
+            val y = random.nextFloat() * size.height
+            val radius = random.nextFloat() * 1.2f + 0.4f
+            val alpha = random.nextFloat() * 0.7f + 0.1f
+
+            drawCircle(
+                color = glitterColors[random.nextInt(glitterColors.size)].copy(alpha = alpha),
+                radius = radius,
+                center = Offset(x, y)
+            )
+        }
+
+        // Add subtle "sparkle" highlights
+        repeat(40) {
+            val x = random.nextFloat() * size.width
+            val y = random.nextFloat() * size.height
+            val sparkleSize = random.nextFloat() * 3f + 1f
+
+            drawLine(
+                Color.White.copy(alpha = 0.4f),
+                Offset(x - sparkleSize, y),
+                Offset(x + sparkleSize, y),
+                strokeWidth = 0.8f
+            )
+            drawLine(
+                Color.White.copy(alpha = 0.4f),
+                Offset(x, y - sparkleSize),
+                Offset(x, y + sparkleSize),
+                strokeWidth = 0.8f
+            )
+        }
+    }
+}
+
 class GrassTexture(
     private val color: Color = Color(0xFF4CAF50),
     private val bladeColor: Color = Color(0xFF2E7D32),
@@ -443,12 +606,12 @@ class ChineseBowlTexture(
         val gridSize = 40f
         val rows = (size.height / gridSize).toInt() + 1
         val cols = (size.width / gridSize).toInt() + 1
-        
+
         for (r in 0 until rows) {
             for (c in 0 until cols) {
                 val cx = c * gridSize + gridSize / 2
                 val cy = r * gridSize + gridSize / 2
-                
+
                 drawCircle(
                     color = patternColor.copy(alpha = 0.15f),
                     radius = 8f,
@@ -505,12 +668,12 @@ class HoneycombTexture(
         val w = radius * 2
         val rows = (size.height / h).toInt() + 2
         val cols = (size.width / (w * 0.75f)).toInt() + 2
-        
+
         for (r in 0 until rows) {
             for (c in 0 until cols) {
                 val cx = c * w * 0.75f
                 val cy = r * h + (if (c % 2 == 1) h / 2 else 0f)
-                
+
                 val path = Path()
                 for (i in 0 until 6) {
                     val angle = i * 60f
@@ -539,14 +702,14 @@ class CircuitBoardTexture(
             var curX = random.nextFloat() * size.width
             var curY = random.nextFloat() * size.height
             path.moveTo(curX, curY)
-            
+
             repeat(4) {
                 val horizontal = random.nextBoolean()
                 val dist = (random.nextFloat() * 100f + 50f) * (if (random.nextBoolean()) 1 else -1)
                 if (horizontal) curX += dist else curY += dist
                 path.lineTo(curX, curY)
             }
-            
+
             drawPath(path, traceColor.copy(alpha = 0.4f), style = Stroke(width = 2f))
             drawCircle(traceColor.copy(alpha = 0.6f), radius = 4f, center = Offset(curX, curY))
         }
@@ -566,7 +729,7 @@ class DiamondPlateTexture(
             for (c in 0 until cols) {
                 val cx = c * spacing + (if (r % 2 == 1) spacing / 2 else 0f)
                 val cy = r * spacing
-                
+
                 val rotation = if (r % 2 == 1) 45f else -45f
                 // Simplified diamond shape
                 drawOval(
@@ -586,7 +749,8 @@ class GraniteTexture(
     override fun DrawScope.draw() {
         drawRect(color)
         val random = Random(seed)
-        val fleckColors = listOf(Color(0xFF212121), Color(0xFF9E9E9E), Color(0xFF424242), Color(0xFFF5F5F5))
+        val fleckColors =
+            listOf(Color(0xFF212121), Color(0xFF9E9E9E), Color(0xFF424242), Color(0xFFF5F5F5))
         repeat(3000) {
             val x = random.nextFloat() * size.width
             val y = random.nextFloat() * size.height
@@ -628,44 +792,145 @@ private fun TexturePreview() {
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(ConcreteTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(IronTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(WoodTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(ConcreteTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(IronTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(WoodTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(CarbonFiberTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(PaperTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(FabricTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(CarbonFiberTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(PaperTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(FabricTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(MarbleTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(LeatherTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(SandTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(MarbleTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(LeatherTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(SandTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(DenimTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(GoldTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(GridTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(DenimTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(GoldTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(GridTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(BrushedSteelTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(GrassTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(PlasticTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(BrushedSteelTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(GrassTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(PlasticTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(SteelTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(ChineseBowlTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(BrickTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(SteelTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(ChineseBowlTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(BrickTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(HoneycombTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(CircuitBoardTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(CircuitBoardTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(DiamondPlateTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(HoneycombTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(CircuitBoardTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(DiamondPlateTexture())
+            )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Box(modifier = Modifier.size(80.dp).texture(GraniteTexture()))
-            Box(modifier = Modifier.size(80.dp).texture(CorkTexture()))
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(RadialSteelTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(SilverGlitterTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(CharcoalGlitterTexture())
+            )
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .texture(CorkTexture())
+            )
         }
     }
 }

@@ -3,13 +3,21 @@ package com.example.neumorphic
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ckgin.neumorphic.demo.NeuSwitchDemo
+import com.ckgin.modify.HugeIcons
+import com.ckgin.neumorphic.NeumorphicPreviewColumn
 import com.ckgin.neumorphic.NeumorphicTheme
+import com.ckgin.neumorphic.new.NeuIconButton
+import com.ckgin.neumorphic.demo.SquarcleShape
 
 
 class MainActivity : ComponentActivity() {
@@ -18,16 +26,96 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NeumorphicTheme {
-                var checked by remember {
-                    mutableStateOf(false)
-                }
+                NeumorphicPreviewColumn {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        NeuIconButton(
+                            onClick = {},
+                            shape = CircleShape
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Home),
+                                contentDescription = "Account"
+                            )
+                        }
 
-                NeuSwitchDemo(
-                    checked = checked,
-                    onCheckedChange = {
-                        checked = it
+                        NeuIconButton(
+                            onClick = {},
+                            shape = SquarcleShape(n = 3f)
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Location),
+                                contentDescription = "Account"
+                            )
+                        }
+
+                        NeuIconButton(
+                            onClick = {},
+                            shape = CircleShape
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Favourite),
+                                contentDescription = "Account"
+                            )
+                        }
                     }
-                )
+
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        NeuIconButton(
+                            onClick = {},
+                            shape = CircleShape,
+                            containerColor = Color.hsl(
+                                hue = 120f,
+                                saturation = 0.2f,
+                                lightness = 0.5f
+                            ),
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Home),
+                                contentDescription = "Account"
+                            )
+                        }
+
+                        NeuIconButton(
+                            onClick = {},
+                            shape = SquarcleShape(n = 3f),
+                            containerColor = Color.hsl(
+                                hue = 240f,
+                                saturation = 0.2f,
+                                lightness = 0.5f
+                            ),
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Location),
+                                contentDescription = "Account"
+                            )
+                        }
+
+                        NeuIconButton(
+                            onClick = {},
+                            shape = CircleShape,
+                            containerColor = Color.hsl(
+                                hue = 300f,
+                                saturation = 0.2f,
+                                lightness = 0.5f
+                            ),
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(HugeIcons.Favourite),
+                                contentDescription = "Account"
+                            )
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,14 +1,14 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.new
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,9 +21,14 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.NeumorphicPreviewSquare
+import com.ckgin.neumorphic.NeumorphicTheme
+import com.ckgin.neumorphic.demo.neuBackground
+import com.ckgin.neumorphic.demo.neuEdgeDown
+import com.ckgin.neumorphic.demo.neuEdgeUp
 
 @Composable
-fun NeumorphicRadioButton(
+fun NeuRadioButton(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
@@ -63,21 +68,19 @@ fun NeumorphicRadioButton(
         modifier = modifier
             .then(toggleableModifier)
             .size(32.dp)
-            .neumorphicDown(
-                shape = CircleShape,
-                shadowPadding = 4.dp,
+            .background(
+                color = NeumorphicTheme.colorScheme.shadow.copy(0.1f),
+                shape = CircleShape
             )
+            .neuEdgeDown(shape = CircleShape)
             .padding(thumbPadding)
     ) {
         if (checked) {
             Box(
                 modifier = Modifier
                     .size(32.dp - (thumbPadding * 2))
-                    .neumorphicUp(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primary,
-                        shadowPadding = shadowPadding
-                    ),
+                    .neuBackground(shape = CircleShape)
+                    .neuEdgeUp(shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {}
         }
@@ -86,17 +89,17 @@ fun NeumorphicRadioButton(
 
 @Preview
 @Composable
-private fun NeumorphicRadioButtonPreview() {
+private fun NeuRadioButtonPreview() {
     NeumorphicPreviewSquare {
 
         var checked by remember { mutableStateOf(false) }
 
-        NeumorphicRadioButton(
+        NeuRadioButton(
             checked = checked,
             onCheckedChange = { checked = it }
         )
 
-        NeumorphicRadioButton(
+        NeuRadioButton(
             checked = !checked,
             onCheckedChange = { checked = !it }
         )

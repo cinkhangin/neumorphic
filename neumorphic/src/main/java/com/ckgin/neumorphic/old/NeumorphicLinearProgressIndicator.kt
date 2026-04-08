@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
@@ -19,6 +19,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.neumorphicDown
+import com.ckgin.neumorphic.neumorphicUp
 
 @Composable
 fun NeumorphicLinearProgressIndicator(
@@ -69,7 +71,7 @@ fun NeumorphicLinearProgressIndicator(
 @Preview
 @Composable
 private fun NeumorphicLinearProgressIndicatorPreview() {
-    NeumorphicPreviewColumn {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewColumn {
         NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { 0f }

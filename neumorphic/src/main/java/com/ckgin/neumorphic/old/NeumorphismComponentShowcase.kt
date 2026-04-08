@@ -95,7 +95,7 @@ fun NeumorphismComponentShowcase() {
                     placeHolder = "Text Field with Placeholder"
                 )
 
-                _root_ide_package_.com.ckgin.neumorphic.NeumorphicButton(
+                NeumorphicButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {},
                     enabled = checked
@@ -103,7 +103,7 @@ fun NeumorphismComponentShowcase() {
                     Text(text = "Button")
                 }
 
-                _root_ide_package_.com.ckgin.neumorphic.NeumorphicButton(
+                NeumorphicButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {},
                     enabled = !checked
@@ -117,28 +117,28 @@ fun NeumorphismComponentShowcase() {
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {
 
-            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
+            NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Favourite),
                     contentDescription = "Fav"
                 )
             }
 
-            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
+            NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Delete),
                     contentDescription = "Fav"
                 )
             }
 
-            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
+            NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Copy),
                     contentDescription = "Fav"
                 )
             }
 
-            _root_ide_package_.com.ckgin.neumorphic.NeumorphicIconButton(onClick = {}) {
+            NeumorphicIconButton(onClick = {}) {
                 Icon(
                     painter = painterResource(HugeIcons.Home),
                     contentDescription = "Fav"
@@ -146,7 +146,7 @@ fun NeumorphismComponentShowcase() {
             }
         }
 
-        _root_ide_package_.com.ckgin.neumorphic.NeumorphicUpHorizontalDivider()
+        NeumorphicUpHorizontalDivider()
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -174,7 +174,7 @@ fun NeumorphismComponentShowcase() {
         )
 
         Text("Linear Progress Indicator at ${(progress * 100).roundToInt()}%", color = MaterialTheme.colorScheme.onBackground)
-        _root_ide_package_.com.ckgin.neumorphic.NeumorphicLinearProgressIndicator(
+        NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { progress }
         )
@@ -212,7 +212,7 @@ fun NeumorphismComponentShowcase() {
         ) {
             Text("Radio Button", color = MaterialTheme.colorScheme.onBackground)
 
-            _root_ide_package_.com.ckgin.neumorphic.NeumorphicRadioButton(
+            NeumorphicRadioButton(
                 checked = checked,
                 onCheckedChange = { checked = it })
         }

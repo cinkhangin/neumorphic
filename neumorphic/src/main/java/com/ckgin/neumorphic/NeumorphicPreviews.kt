@@ -51,7 +51,7 @@ internal fun NeumorphicPreviewBox(
 }
 
 @Composable
-internal fun NeumorphicPreviewColumn(
+fun NeumorphicPreviewColumn(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {

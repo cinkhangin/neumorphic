@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ckgin.modify.HugeIcons
+import com.ckgin.neumorphic.neumorphicUp
 
 @Composable
 fun NeumorphicIconButton(
@@ -90,7 +91,7 @@ fun NeumorphicIconButton(
 @Preview
 @Composable
 private fun NeumorphicIconButtonPreview() {
-    NeumorphicPreviewSquare {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewSquare {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {

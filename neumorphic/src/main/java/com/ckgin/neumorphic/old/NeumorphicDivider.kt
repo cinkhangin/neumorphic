@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.neumorphicDown
+import com.ckgin.neumorphic.neumorphicUp
 
 @Composable
 fun NeumorphicUpHorizontalDivider(
@@ -89,7 +91,7 @@ fun NeumorphicDownVerticalDivider(
 @Preview
 @Composable
 private fun NeumorphicDividerPreview() {
-    NeumorphicPreviewSquare {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewSquare {
         NeumorphicUpHorizontalDivider(thickness = 8.dp)
         NeumorphicDownHorizontalDivider(thickness = 8.dp)
         Row {

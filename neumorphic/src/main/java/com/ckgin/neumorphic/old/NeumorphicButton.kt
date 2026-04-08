@@ -1,4 +1,4 @@
-package com.ckgin.neumorphic
+package com.ckgin.neumorphic.old
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -31,6 +31,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.neumorphicUp
 
 
 @Composable
@@ -38,9 +39,9 @@ fun NeumorphicButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: Shape = NeumorphicButtonDefaults.shape,
-    colors: ButtonColors = NeumorphicButtonDefaults.buttonColors(),
-    contentPadding: PaddingValues = NeumorphicButtonDefaults.ContentPadding,
+    shape: Shape = com.ckgin.neumorphic.NeumorphicButtonDefaults.shape,
+    colors: ButtonColors = com.ckgin.neumorphic.NeumorphicButtonDefaults.buttonColors(),
+    contentPadding: PaddingValues = com.ckgin.neumorphic.NeumorphicButtonDefaults.ContentPadding,
     content: @Composable RowScope.() -> Unit
 ) {
 
@@ -73,8 +74,8 @@ fun NeumorphicButton(
                     shadowPadding = shadowPadding
                 )
                 .defaultMinSize(
-                    minWidth = NeumorphicButtonDefaults.MinWidth,
-                    minHeight = NeumorphicButtonDefaults.MinHeight
+                    minWidth = com.ckgin.neumorphic.NeumorphicButtonDefaults.MinWidth,
+                    minHeight = com.ckgin.neumorphic.NeumorphicButtonDefaults.MinHeight
                 )
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
@@ -98,7 +99,7 @@ fun NeumorphicButton(
 @Preview
 @Composable
 private fun NeumorphicButtonPreview() {
-    NeumorphicPreviewSquare {
+    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewSquare {
         NeumorphicButton(onClick = {}) {
             Text(text = "Neumorphic Button")
         }
