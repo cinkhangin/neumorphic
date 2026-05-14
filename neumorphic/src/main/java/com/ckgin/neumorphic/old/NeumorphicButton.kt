@@ -31,6 +31,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ckgin.neumorphic.NeumorphicPreviewSquare
 import com.ckgin.neumorphic.neumorphicUp
 
 
@@ -99,7 +100,7 @@ fun NeumorphicButton(
 @Preview
 @Composable
 private fun NeumorphicButtonPreview() {
-    _root_ide_package_.com.ckgin.neumorphic.NeumorphicPreviewSquare {
+   NeumorphicPreviewSquare {
         NeumorphicButton(onClick = {}) {
             Text(text = "Neumorphic Button")
         }

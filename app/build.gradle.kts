@@ -8,12 +8,12 @@ val packageName = "com.example.neumorphic"
 
 android {
     namespace = packageName
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = packageName
         minSdk = 28
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -73,8 +73,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 
     //naulian
-    implementation(libs.naulian.anhance)
-    implementation(libs.naulian.modify)
+    implementation(libs.ckgin.anhance)
+    implementation(libs.ckgin.modify)
 
     implementation(libs.kotlinx.serialization.json)
 

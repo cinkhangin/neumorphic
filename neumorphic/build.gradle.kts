@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.ckgin.neumorphic"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28
@@ -69,8 +69,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 
     //naulian
-    implementation(libs.naulian.anhance) //android kt extension
-    implementation(libs.naulian.modify) //compose utils and extension
+    implementation(libs.ckgin.anhance) //android kt extension
+    implementation(libs.ckgin.modify) //compose utils and extension
 }
 
 mavenPublishing {

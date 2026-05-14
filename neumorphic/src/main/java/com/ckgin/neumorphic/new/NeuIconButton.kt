@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -13,22 +14,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,36 +57,40 @@ fun NeuIconButton(
     val contentColor = if (containerColor.luminance() > 0.5f) MaterialTheme.colorScheme.onSurface
     else MaterialTheme.colorScheme.onPrimary
 
-    var touch by remember { mutableStateOf(false) }
+    val actualInteractionSource = interactionSource ?: remember { MutableInteractionSource() }
+    val isPressed by actualInteractionSource.collectIsPressedAsState()
 
-    val lightColor by animateColorAsState(
+    val animatedLightColor by animateColorAsState(
         targetValue = when {
-            enabled -> if (touch) containerColor.shadow(0.1f) else containerColor.light()
+            enabled -> if (isPressed) containerColor.shadow(0.2f) else containerColor.light()
             else -> containerColor.light()
         },
         animationSpec = tween(
             durationMillis = 400
-        )
+        ),
+        label = "lightColor"
     )
 
-    val shadowColor by animateColorAsState(
+    val animatedShadowColor by animateColorAsState(
         targetValue = when {
-            enabled -> if (touch) containerColor.shadow(0.1f) else containerColor.shadow()
+            enabled -> if (isPressed) containerColor.shadow(0.2f) else containerColor.shadow()
             else -> containerColor.shadow()
         },
         animationSpec = tween(
             durationMillis = 400
-        )
+        ),
+        label = "shadowColor"
     )
 
-    val containerColor by animateColorAsState(
+    val animatedContainerColor by animateColorAsState(
         targetValue = when {
-            enabled -> if (touch) containerColor.shadow(0.1f) else containerColor
+            enabled -> if (isPressed) containerColor.shadow(0.1f) else containerColor
             else -> containerColor
         },
         animationSpec = tween(
             durationMillis = 400
-        )
+        ),
+        label = "containerColor"
     )
 
     Box(
@@ -103,31 +106,23 @@ fun NeuIconButton(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = containerColor, shape = shape)
+                .background(color = animatedContainerColor, shape = shape)
                 .neuEdgeUp(
                     shape,
                     radius = 1.dp,
                     offset = 3.dp,
-                    shadow = shadowColor,
-                    light = lightColor
+                    shadow = animatedShadowColor,
+                    light = animatedLightColor
                 )
                 .padding(2.dp)
-                .background(color = containerColor, shape = shape)
-                .pointerInput(Unit) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            val change = event.changes.first()
-                            touch = change.pressed
-                        }
-                    }
-                }
-                .clip(CircleShape)
+                .background(color = animatedContainerColor, shape = shape)
+                .clip(shape)
                 .clickable(
                     onClick = onClick,
                     enabled = enabled,
                     role = Role.Button,
-                    interactionSource = interactionSource,
+                    interactionSource = actualInteractionSource,
+                    indication = null
                 ),
             contentAlignment = Alignment.Center
         ) {
@@ -145,7 +140,18 @@ private fun NeuIconButtonPreview() {
         ) {
             NeuIconButton(
                 onClick = {},
-                shape = CircleShape
+                shape = SquarcleShape(n = 3f)
+            ) {
+                Icon(
+                    modifier = Modifier.size(16.dp),
+                    painter = painterResource(HugeIcons.Location),
+                    contentDescription = "Account"
+                )
+            }
+            
+            NeuIconButton(
+                onClick = {},
+                shape = RoundedCornerShape(50)
             ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
@@ -156,18 +162,7 @@ private fun NeuIconButtonPreview() {
 
             NeuIconButton(
                 onClick = {},
-                shape = SquarcleShape(n = 3f)
-            ) {
-                Icon(
-                    modifier = Modifier.size(16.dp),
-                    painter = painterResource(HugeIcons.Location),
-                    contentDescription = "Account"
-                )
-            }
-
-            NeuIconButton(
-                onClick = {},
-                shape = CircleShape
+                shape = RoundedCornerShape(50)
             ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
@@ -191,7 +186,7 @@ private fun NeuIconButtonPreview() {
             ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
-                    painter = painterResource(HugeIcons.Home),
+                    painter = painterResource(HugeIcons.Notification),
                     contentDescription = "Account"
                 )
             }
@@ -207,14 +202,14 @@ private fun NeuIconButtonPreview() {
             ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
-                    painter = painterResource(HugeIcons.Location),
+                    painter = painterResource(HugeIcons.Gift),
                     contentDescription = "Account"
                 )
             }
 
             NeuIconButton(
                 onClick = {},
-                shape = CircleShape,
+                shape = RoundedCornerShape(20),
                 containerColor = Color.hsl(
                     hue = 300f,
                     saturation = 0.2f,
@@ -223,7 +218,7 @@ private fun NeuIconButtonPreview() {
             ) {
                 Icon(
                     modifier = Modifier.size(16.dp),
-                    painter = painterResource(HugeIcons.Favourite),
+                    painter = painterResource(HugeIcons.Bookmark2),
                     contentDescription = "Account"
                 )
             }
